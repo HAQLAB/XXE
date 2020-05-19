@@ -1,6 +1,7 @@
 ﻿LEZIONE XXE notes
 
 https://portswigger.net/web-security/xxe/xml-entities
+https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection
 
 sudo apt install git docker.io
 git clone https://github.com/jbarone/xxelab
