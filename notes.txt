@@ -9,9 +9,6 @@ sudo systemctl start docker
 sudo -g docker docker build -t xxelab .
 sudo -g docker docker run -it --rm -p 127.0.0.1:5000:80 xxelab
 //comment out the print
-sudo -g docker docker ps
-sudo -g docker docker images
-sudo -g docker docker image rm f4de63be01b9 6e4f1fe62ff1
 sudo -g docker docker build -t xxelab .
 sudo -g docker docker run -it --rm -p 127.0.0.1:5000:80 xxelab
 
